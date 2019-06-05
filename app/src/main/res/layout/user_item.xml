@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="listener"
+            type="com.example.githubusers.databinding.MainActivityListener" />
+        <variable
+            name="user"
+            type="com.example.githubusers.api.GithubUser" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp"
+        android:onClick="@{() -> listener.onUserClick(user)}"
+        android:background="?selectableItemBackground">
+
+        <agency.tango.android.avatarview.views.AvatarView
+            android:id="@+id/avatar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:av_border_color="@android:color/darker_gray"
+            app:av_border_width="1dp"
+            app:av_text_size_percentage="40"
+            app:user="@{user}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/username"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="@{user.username}"
+            app:layout_constraintBottom_toTopOf="@id/caption"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/caption"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/username"
+            android:text='@{String.format("%s • %.2f", user.type, user.accuracy)}' />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
